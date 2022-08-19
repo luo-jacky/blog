@@ -49,8 +49,8 @@ jobs: #要运行的任务
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: docs/.vuepress/dist
-          destination: docs/README.md
+          source:
+            destination: docs/.vuepress/dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
 
