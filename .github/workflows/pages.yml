@@ -30,7 +30,7 @@ jobs: #要运行的任务
     steps:
       # 一些检查 输出
       - name: Checkout
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
