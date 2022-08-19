@@ -31,7 +31,6 @@ jobs: #要运行的任务
       # 一些检查 输出
       - name: Checkout
       - uses: actions/checkout@v3
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -42,15 +41,7 @@ jobs: #要运行的任务
         run: |
           yarn
           yarn docs:build
-      # 完成打包之后 使用 github-pages-deploy-action 去自己把打包后的产物发布上去
-      # - name: Deploy 🚀
-      #   uses: JamesIves/github-pages-deploy-action@v4.3.0
-      #   with:
-      #     branch: develop # 发布到哪个分支？
-      #     folder: docs/.vuepress/dist # 打包的文件目录
-      #     clean-exclude:
-      #       | # 忽略清除的文件 可以是文件名路径等 每次发布前都会清除所有文件所以需要 屏蔽一些文件或者目录不要清除。
-      #       .gitignore
+
       - name: Setup Pages
         uses: actions/configure-pages@v1
       - name: Build with Jekyll
