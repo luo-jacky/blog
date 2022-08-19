@@ -1,6 +1,7 @@
 module.exports = {
   title: 'Hello VuePress',
   description: 'Just playing around',
+  base: '/blog/',
   themeConfig: {
     logo: 'https://gitee.com/luojinyuan/picture/raw/master/logo.svg',
     nav: [
