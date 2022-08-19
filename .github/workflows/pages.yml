@@ -1,50 +1,38 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+name: update pages #名称 随意
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+on: # 触发条件
+  push: # 当推送的时候
+    branches: [main] # 分支 可以有多个 且为 master 触发
+    # paths: ['src/**'] # 且 推送的文件在此目录下 触发
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
-jobs:
-  # Build job
-  build:
-    runs-on: ubuntu-latest
+jobs: #要运行的任务
+  build: #任务名 随意
+    runs-on: ubuntu-latest # 运行的机器环境 可以是 linux 等等 具体请查阅文档
+    # 用到的 node 版本
+    strategy:
+      matrix:
+        node-version: [16.14.0]
+    # 运行步骤
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v1
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+      # 一些检查 输出
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          source: ./
-          destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+          node-version: ${{ matrix.node-version }}
+      # 开始 打包
+      - name: Build
+        # run 下面 是需要运行的命令行 按照命令行步骤执行 先安装依赖 再 打包 你也可以自定义
+        run: |
+          yarn
+          yarn docs:build
+      # 完成打包之后 使用 github-pages-deploy-action 去自己把打包后的产物发布上去
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        with:
+          branch: main # 发布到哪个分支？
+          folder: docs/.vuepress/dist # 打包的文件目录
+          clean-exclude:
+            | # 忽略清除的文件 可以是文件名路径等 每次发布前都会清除所有文件所以需要 屏蔽一些文件或者目录不要清除。
+            .gitignore
