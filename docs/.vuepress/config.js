@@ -2,15 +2,37 @@ const $withBase = require('vue').$withBase
 module.exports = {
   title: 'Hello VuePress',
   description: 'Just playing around',
-  base: '/blog/',
+  chainWebpack: (config, isServer) => {
+    config.module
+      .rule('pdfs')
+      .test(/\.pdf$/)
+      .use('file-loader')
+      .loader('file-loader')
+      .options({
+        name: `[path][name].[ext]`,
+      });
+
+    config.module
+      .rule('vue')
+      .uses.store.get('vue-loader')
+      .store.get('options').transformAssetUrls = {
+      video: ['src', 'poster'],
+      source: 'src',
+      img: 'src',
+      image: ['xlink:href', 'href'],
+      a: 'href',
+    };
+  },
+  base: '/',
   theme: 'reco',
   themeConfig: {
+    authorAvatar: '/log.png',
     noFoundPageByTencent: false,
     nav: [
       {
         text: '首页',
         link: '/',
-        icon: '@alias/assts/log.png',
+        icon: '/log.png',
       },
     ],
     subSidebar: 'auto',
@@ -25,7 +47,7 @@ module.exports = {
         text: '标签',
       },
     },
-    logo: '@alias/assts/log.png',
+    logo: '/log.png',
     search: true,
     searchMaxSuggestions: 10,
     lastUpdated: 'Last Updated',

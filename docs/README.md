@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: '.vuepress/public/assts/log.png'
+heroImage: '/log.png'
 heroText: 罗先生文档库
 tagline: 记录技术总结
 bgImageStyle: { height: "450px" }
