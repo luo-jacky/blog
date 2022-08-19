@@ -31,6 +31,7 @@ jobs: #要运行的任务
       # 一些检查 输出
       - name: Checkout
       - uses: actions/checkout@v3
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -44,6 +45,7 @@ jobs: #要运行的任务
 
       - name: Setup Pages
         uses: actions/configure-pages@v1
+
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
