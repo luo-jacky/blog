@@ -23,7 +23,7 @@ module.exports = {
       a: 'href',
     };
   },
-  base: '/',
+  base: '/blog/',
   theme: 'reco',
   themeConfig: {
     authorAvatar: '/log.png',
