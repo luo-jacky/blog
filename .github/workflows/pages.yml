@@ -42,7 +42,7 @@ jobs: #要运行的任务
         run: |
           yarn
           yarn docs:build
-
+          cd docs/.vuepress/dist
       - name: Setup Pages
         uses: actions/configure-pages@v1
 
@@ -50,7 +50,7 @@ jobs: #要运行的任务
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
-          destination: ./docs/.vuepress/dist
+          destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
 
