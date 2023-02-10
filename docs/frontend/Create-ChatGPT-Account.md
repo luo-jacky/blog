@@ -1,3 +1,15 @@
+---
+title: 注册ChatGPT详细指南
+date: 2023-02-010 15:32:00
+sidebar:
+  - frontend
+tags:
+  - ChatGPT
+  - sms-activate.org
+author: 罗锦源
+publish: true
+---
+
 # **注册ChatGPT详细指南**
 
 **最近ChatGPT真受欢迎，但是有些人注册时会经常面临不服务它们的地区问题，现在我们给你详细问题解决。**
